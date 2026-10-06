@@ -11,6 +11,7 @@ from sklearn.neighbors import KNeighborsRegressor
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error, root_mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
+from util import get_most_active
 
 favicon_path = "main/Tradmincer_big.png"
 st.set_page_config(
@@ -49,7 +50,7 @@ st.sidebar.markdown(
 
 
 
-results = yf.screen('most_actives')
+results = get_most_active()
 top10 = results['quotes'][1:150]
 
 currency = {

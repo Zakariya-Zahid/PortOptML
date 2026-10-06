@@ -9,6 +9,7 @@ import time
 from scipy.optimize import minimize
 import plotly.express as px
 import matplotlib.cm as cm
+from util import get_most_active
 
 
 favicon_path = "main/Tradmincer_big.png"
@@ -46,7 +47,7 @@ st.sidebar.markdown(
 
 
 
-results = yf.screen('most_actives')
+results = get_most_active()
 top10 = results['quotes'][1:150]
 
 currency = {
@@ -270,7 +271,7 @@ with coll1:
           f"<b>{weight:.2%}</b>",
           unsafe_allow_html=True
       )
-      data = pd.Series([stock], index=[weight])  
+      data = pd.Series([stock], index=[weight])
 
 with coll2:
    colors = cm.tab20(np.linspace(0, 1, len(new_data['stocks'])))
