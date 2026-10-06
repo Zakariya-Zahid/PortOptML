@@ -153,7 +153,7 @@ with st.sidebar.form("portfolio_form", clear_on_submit=True):
     stock_quantity = st.number_input("Quantity", min_value=1, value=10)
 
     ticker = yf.Ticker(stock_symbol)
-    u_price = ticker.fast_info['last_price']
+    u_price = ticker.info.get('currentPrice', 0) or ticker.info.get('regularMarketPrice', 0)
     price = u_price * stock_quantity
     
     # st.write("Live Price (fast):", price)
@@ -271,7 +271,7 @@ with coll1:
           f"<b>{weight:.2%}</b>",
           unsafe_allow_html=True
       )
-      data = pd.Series([stock], index=[weight])
+      stock_series = pd.Series([stock], index=[weight])
 
 with coll2:
    colors = cm.tab20(np.linspace(0, 1, len(new_data['stocks'])))
