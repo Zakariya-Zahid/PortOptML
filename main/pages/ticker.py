@@ -124,7 +124,7 @@ st.write(tick.quarterly_income_stmt)
 # '''extra inof'''
 meta = tick.info
 
-company = meta['longName']
+company = meta.get('longName', st.session_state['tick'])
 st.markdown(f"<h3>The business summary of <span style='color:#00F0A8;'>{company}</span></h3>", unsafe_allow_html=True)
 st.write(meta['longBusinessSummary'])
  
@@ -139,7 +139,7 @@ with col1:
     st.write(f"**Industry:** {meta['industry']}")
     st.write(f"**Website:** {meta['website']}")
     st.write(f"**Phone:** {meta['phone']}")
-    st.write(f"**Current Price:** {meta['currentPrice']:.2f} {meta['currentPrice']}")
+    st.write(f"**Current Price:** {meta['currentPrice']:.2f} {meta.get('currency', 'USD')}")
     st.write(f"**Market Cap:** {meta['marketCap']:,} {meta['currency']}")
     st.write(f"**52 Week High:** {meta['fiftyTwoWeekHigh']:.2f} {meta['currency']}")
     st.write(f"**52 Week Low:** {meta['fiftyTwoWeekLow']:.2f} {meta['currency']}")
